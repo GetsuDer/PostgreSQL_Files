@@ -91,7 +91,14 @@ FROM Lesson_Student AS LS1 INNER JOIN Lesson_Student AS LS2 USING (Student_Id)
 WHERE LS1.Lesson_Id < LS2.Lesson_Id AND (LS1.Lesson_Id, LS2.Lesson_Id) IN (TABLE L3)
 ORDER BY Student_Id, LS1.Lesson_Id, LS2.Lesson_Id;
 */
-
+/*
+SELECT F1.Student_Id, LS1.Lesson_Id, LS2.Lesson_Id
+FROM (Factical_Learnings AS F1 NATURAL JOIN Lessons AS LS1) JOIN (Factical_Learnings AS F2 NATURAL JOIN Lessons LS2) 
+	ON (F1.Student_Id = F2.Student_Id AND LS1.Lesson_Id < LS2.Lesson_Id AND LS1.Week_Day = LS2.Week_Day AND NOT
+		(LS1.Start_Time + LS1.Duration < LS2.Start_Time OR LS2.Start_Time + LS2.Duration < LS1.Start_Time)
+	   	)
+ORDER BY Student_Id, LS1.Lesson_Id, LS2.Lesson_Id;
+*/
 -- Отменить лекции по физике. Не работает, потому что
 --нельзя удалять предмет прежде, чем уроки по предмету (Lessons) и связи профессоров с предметом,
 -- а Lessons - прежде, чем связь студентов и уроков

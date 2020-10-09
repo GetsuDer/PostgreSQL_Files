@@ -1,3 +1,8 @@
+DROP TRIGGER IF EXISTS My_trigger1 ON Subjects;
+DROP FUNCTION IF EXISTS My_function1;
+DROP TRIGGER IF EXISTS My_trigger2 ON Lessons;
+DROP FUNCTION IF EXISTS My_function2;
+
 DROP TABLE IF EXISTS Knowledge_Areas;
 DROP TABLE IF EXISTS Factical_Learnings;
 
@@ -45,8 +50,7 @@ CREATE TABLE Subjects (
 CREATE TABLE Lessons (
 	Lesson_Id SERIAL PRIMARY KEY,
 	Subject_Id integer REFERENCES Subjects ON DELETE RESTRICT ON UPDATE CASCADE,
-	Classroom text NULL, -- May be distant
-	Lesson_Link text NULL,
+	Classroom text NOT NULL,
 	Lesson_Type text NOT NULL DEFAULT 'Usial',
 	Week_day text,
 	Start_time time,

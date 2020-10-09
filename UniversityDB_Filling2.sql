@@ -97,32 +97,6 @@ INSERT INTO Subjects (Subject_Name, Sertification_Type, Importancy) VALUES
 ('Music', NULL, 'Optional'),
 ('Drawing', NULL, 'Optional');
 
-INSERT INTO Lessons (Subject_Id, Classroom, Week_Day, Start_Time) VALUES
- (1, 'П13', 'Monday', '08:45'),
- (2, '555', 'Tuesday', '10:20'),
- (3, '615', 'Wednesday', '12:50'),
- (3, '615', 'Wednesday', '16:20'),
- (4, 'П6', 'Thursday', '09:00'),
- (4, 'П6', 'Monday', '10:20'),
- (5, '609', 'Friday', '16:20'),
- (6, 'П4', 'Saturday', '16:20'),
- (6, 'П4', 'Saturday', '14:35'),
- (7, '72', 'Monday', '8:45'),
- (8, NULL, 'Thursday', '16:20'),
- (8, NULL, 'Thursday', '17:55'),
- (9, NULL, 'Monday', '8:45'),
- (10, NULL, 'Friday', '16:20'),
- (11, 'П12', 'Saturday', '9:00'),
- (12, '561', 'Monday', '10:20'), 
- (13, 'БФА-1', 'Friday', '8:45'),
- (13, 'БФА-1', 'Friday', '10:20'),
- (14, '601', 'Thursday', '10:20');
-
-INSERT INTO Lessons (Subject_Id, Classroom, Week_day, Start_Time, Duration) VALUES
-(15, 'Dance place', 'Wednesday', '7:00', INTERVAL '2' HOUR),
-(16, 'П4', 'Tuesday', '15:00', INTERVAL '4' HOUR),
-(17, 'Drawing place', 'Monday', '10:00', INTERVAL '3' HOUR);
-
 INSERT INTO Knowledge_Areas (Professor_Id, Subject_Id) VALUES
 (1, 1), --Lectures
 (1, 2), --Seminars
@@ -215,4 +189,28 @@ INSERT INTO Factical_Learnings (Student_Id, Subject_Id) VALUES
 (52, 3), (52, 4), (52, 17),
 (53, 5), (53, 17);
 
+INSERT INTO Lessons (Subject_Id, Classroom, Week_Day, Start_Time) VALUES
+ (1, 'П13', 'Monday', '08:45'),
+ (2, '555', 'Tuesday', '10:20'),
+ (3, '615', 'Wednesday', '12:50'),
+ (3, '615', 'Wednesday', '16:20'),
+ (4, 'П6', 'Thursday', '09:00'),
+ (4, 'П6', 'Monday', '10:20'),
+ (5, '609', 'Friday', '16:20'),
+ (6, 'П4', 'Saturday', '16:20'),
+ (6, 'П4', 'Saturday', '14:35'),
+ (7, '72', 'Monday', '8:45'),
+ (8, 'msu.ru', 'Thursday', '16:20'),
+ (8, 'msu.ru', 'Thursday', '17:55'),
+ (9, 'msu.ru', 'Monday', '8:45'),
+ (10, 'msu.ru', 'Friday', '16:20'),
+ (11, 'П12', 'Saturday', '9:00'),
+ (12, '561', 'Monday', '10:20'), 
+ (13, 'БФА-1', 'Friday', '8:45'),
+ (13, 'БФА-1', 'Friday', '10:20'),
+ (14, '601', 'Thursday', '10:20');
 
+INSERT INTO Lessons (Subject_Id, Classroom, Week_day, Start_Time, Duration) VALUES
+(15, 'Dance place', 'Wednesday', '7:00', INTERVAL '2' HOUR),
+(16, 'П4', 'Tuesday', '15:00', INTERVAL '4' HOUR),
+(17, 'Drawing place', 'Monday', '10:00', INTERVAL '3' HOUR);
