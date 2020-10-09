@@ -1,29 +1,29 @@
---DROP FUNCTION  IF EXISTS My_func()
+--DROP FUNCTION  IF EXISTS My_function()
 
-CREATE FUNCTION My_func() 
+CREATE FUNCTION My_function() 
 RETURNS trigger AS '
 BEGIN
 	IF (SELECT count (*) 
-		  FROM (Knowedge_Areas NATURAL JOIN Subjects)
-		  WHERE Subject_Name = TH_ARGV[0]) > 0 THEN 
+		  FROM (Knowledge_Areas NATURAL JOIN Subjects)
+		  WHERE Subject_Name = OLD.Subject_Name) > 0 THEN 
 			BEGIN
-				RAISE NOTICE ''WRONG'';
+				RAISE NOTICE ''Unsolved dependences in Knowledge_Areas for %'', OLD.Subject_Name;
 				RETURN NULL;
 			END;
 	END IF;
 	IF (SELECT count (*) 
-		  FROM (Factical_Leatnings NATURAL JOIN Subjects)
-		  WHERE Subject_Name = TH_ARGV[0]) > 0 THEN
+		  FROM (Factical_Learnings NATURAL JOIN Subjects)
+		  WHERE Subject_Name = OLD.Subject_Name) > 0 THEN
 				BEGIN
-					RAISE NOTICE ''WRONG'';
+					RAISE NOTICE ''Unsolved dependences in Factical_Learnings for %'', OLD.Subject_Name;
 					RETURN NULL;
 				END;
 	END IF;
 	IF (SELECT count (*) 
 		  FROM (Lessons NATURAL JOIN Subjects)
-		  WHERE Subject_Name = TH_ARGV[0]) > 0 THEN
+		  WHERE Subject_Name = OLD.Subject_Name) > 0 THEN
 			BEGIN
-				RAISE NOTICE ''WRONG'';
+				RAISE NOTICE ''Unsolved dependences in Lessons for %'', OLD.Subject_Name;
 				RETURN NULL;
 			END;
 	END IF;
