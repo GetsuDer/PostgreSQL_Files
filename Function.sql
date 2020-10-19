@@ -1,32 +1,29 @@
---DROP FUNCTION  IF EXISTS My_function()
-
-CREATE FUNCTION My_function() 
+CREATE FUNCTION Changing_Application() 
 RETURNS trigger AS '
 BEGIN
-	IF (SELECT count (*) 
-		  FROM (Knowledge_Areas NATURAL JOIN Subjects)
-		  WHERE Subject_Name = OLD.Subject_Name) > 0 THEN 
-			BEGIN
-				RAISE NOTICE ''Unsolved dependences in Knowledge_Areas for %'', OLD.Subject_Name;
-				RETURN NULL;
-			END;
+	IF (TG_OP = ''INSERT'') THEN 
+		BEGIN
+			UPDATE Entrants SET Made_Applications = Made_Applications || ARRAY[NEW.Application_Id]
+				WHERE Entrant_Id = NEW.Entrant_Id;
+		END;
 	END IF;
-	IF (SELECT count (*) 
-		  FROM (Factical_Learnings NATURAL JOIN Subjects)
-		  WHERE Subject_Name = OLD.Subject_Name) > 0 THEN
-				BEGIN
-					RAISE NOTICE ''Unsolved dependences in Factical_Learnings for %'', OLD.Subject_Name;
-					RETURN NULL;
-				END;
+	
+	IF (TG_OP = ''DELETE'') THEN
+		BEGIN
+			UPDATE Entrants SET Made_Applications = array_remove(Made_Applications, NEW.Application_Id)
+				WHERE Entrant_Id = NEW.Entrant_Id;
+		END;
 	END IF;
-	IF (SELECT count (*) 
-		  FROM (Lessons NATURAL JOIN Subjects)
-		  WHERE Subject_Name = OLD.Subject_Name) > 0 THEN
-			BEGIN
-				RAISE NOTICE ''Unsolved dependences in Lessons for %'', OLD.Subject_Name;
-				RETURN NULL;
-			END;
+	
+	IF(TG_OP = ''UPDATE'') THEN
+		BEGIN
+			UPDATE Entrants SET Made_Applications = array_remove(Made_Applications, NEW.Application_Id)
+			WHERE Entrant_Id = OLD.Entrant_Id;
+			UPDATE Entrants SET Made_Applications = Made_Applications || ARRAY[NEW.Application_Id]
+			WHERE Entrant_Id = NEW.Entrant_Id;
+		END;
 	END IF;
-	RETURN OLD;
+	
+	RETURN NULL;
 END'
 LANGUAGE plpgsql;

@@ -35,7 +35,7 @@ CREATE TABLE Applications (
 	Application_Id SERIAL PRIMARY KEY,
 	Entrant_Id int REFERENCES Entrants ON DELETE RESTRICT ON UPDATE CASCADE,
 	Direction_Id int REFERENCES Learning_Directions ON DELETE RESTRICT ON UPDATE CASCADE,
-	Date_day date,
+	Date_day timestamp,
 	Score int
 );
 
